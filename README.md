@@ -1,20 +1,20 @@
 # PULSEBOT
-PulseBot
+### PulseBot
 PulseBot is an automated daily report generator built with Python and GitHub Actions.
-Features
+### Features
  * Fetches current weather information
  * Fetches a motivational quote
  * Generates a Daily Pulse Report
  * Runs automatically using GitHub Actions
-Technologies Used
+### Technologies Used
  * Python
  * Requests
  * GitHub Actions
-Project Structure
+### Project Structure
  * pulsebot.py – Main application
  * requirements.txt – Dependencies
  * .github/workflows/daily.yml – Automation workflow
-How It Works
+### How It Works
  1. Retrieves weather data from wttr.in
  2. Retrieves a quote from zenquotes.io
  3. Generates a Daily Pulse Report
