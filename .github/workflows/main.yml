@@ -2,8 +2,9 @@ name: Pulse Daily Summary Bot
 
 on:
   schedule:
+    # 2:30 AM UTC translates exactly to 8:00 AM IST
     - cron: '30 2 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to manually trigger this anytime via a button
 
 jobs:
   run-pulse:
