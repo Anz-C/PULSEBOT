@@ -2,9 +2,9 @@ name: Pulse Daily Summary Bot
 
 on:
   schedule:
-    # 2:30 AM UTC translates exactly to 8:00 AM IST
+    # 2:30 AM UTC = 8:00 AM IST
     - cron: '30 2 * * *'
-  workflow_dispatch: # Allows you to manually trigger this anytime via a button
+  workflow_dispatch: 
 
 jobs:
   run-pulse:
@@ -21,6 +21,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # Ensure 'requests' is installed; creating requirements file if missing
+          echo "requests" > requirements.txt
           pip install -r requirements.txt
 
       - name: Run Pulse bot
@@ -31,3 +33,4 @@ jobs:
         with:
           name: daily-summary
           path: daily_summary.txt
+          if-no-files-found: error
