@@ -1,28 +1,51 @@
 import text
 from datetime import datetime
 #weather
-def get_weather(city="Thiruvananthapuram"):
-    """Fetch today's weather as a one-line text summary."""
-    url = f"https://wttr.in/{city}?format=3"
+def get_weather(city="Palakkad"): 
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(f"https://wttr.in/{city}?format=3", timeout=10)
         response.raise_for_status()
         return response.text.strip()  # Strip removes accidental newlines
     except Exception as e:
-        return f"Weather unavailable ({e})"
+        return f"Weather error: {e}"
   #quote
-  def get_quote():
-    """Fetch a random motivational quote."""
-    url = "https://zenquotes.io/api/random"
+ def get_quote(): 
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get("https://zenquotes.io/api/random", timeout=10)
         response.raise_for_status()
         data = response.json()
-        
-        # Pull key values out of the first item in the list
-        quote = data[0]["q"]
-        author = data[0]["a"]
-        return f'"{quote}" — {author}'
+        return f"{data[0]["q"]} — {data[0]["a"]}"
     except Exception as e:
-        return f"Quote unavailable ({e})"
-      
+        return f"Quote error: {e}"
+#summary
+def build_summary():
+    today = date.today().strftime("%A, %B %d, %Y")
+    weather = get_weather()
+    quote = get_quote()
+    
+    summary = f"""
+=========================================
+PULSE Daily Summary
+Date: {today}
+=========================================
+
+WEATHER:
+{weather}
+
+TODAY'S QUOTE:
+{quote}
+
+=========================================
+"""
+    return summary
+def run():
+    summary = build_summary()
+    print(summary)
+    
+    with open("daily_summary.txt", "w", encoding="utf-8") as f:
+        f.write(summary)
+        
+    print("Pulse ran successfully.")
+
+if __name__ == "__main__":
+    run()
